@@ -1,3 +1,140 @@
+/* ================= AESTHETIC ANIMATED BACKGROUND ================= */
+body {
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, 
+        rgba(37, 99, 235, 0.15), 
+        rgba(124, 58, 237, 0.1), 
+        rgba(16, 185, 129, 0.1));
+    animation: float 20s infinite linear;
+}
+
+.bg-particle:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 5%;
+    animation-duration: 25s;
+    animation-delay: 0s;
+}
+
+.bg-particle:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    right: 10%;
+    animation-duration: 30s;
+    animation-delay: 5s;
+}
+
+.bg-particle:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 20%;
+    animation-duration: 35s;
+    animation-delay: 10s;
+}
+
+.bg-particle:nth-child(4) {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    right: 30%;
+    animation-duration: 40s;
+    animation-delay: 15s;
+}
+
+.bg-particle:nth-child(5) {
+    width: 250px;
+    height: 250px;
+    bottom: 10%;
+    right: 5%;
+    animation-duration: 45s;
+    animation-delay: 20s;
+}
+
+/* Grid lines */
+.grid-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+}
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(20px, -20px) rotate(90deg);
+    }
+    50% {
+        transform: translate(0, -40px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-20px, -20px) rotate(270deg);
+    }
+}
+
+/* Pulse animation for cards */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+    }
+    100% {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.project-card:hover,
+.link-card:hover {
+    animation: pulse 2s infinite;
+}
+
+/* Content overlay - ensures text stays readable */
+.content-overlay {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+}
+
+/* Update existing body style */
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 50%, #e0f2fe 100%);
+}
+
+
 /* Reset and Base Styles */
 * {
     margin: 0;
