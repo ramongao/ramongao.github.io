@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">Portfolio</a>
+            <a href="index.html" class="logo">Raymond Gao</a>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="about.html" class="active"><i class="fas fa-user"></i> About</a></li>
@@ -25,79 +25,165 @@
     </nav>
 
     <main class="container">
-        <h1 class="page-title">About Me</h1>
-        
-        <section class="about-section">
-            <div class="about-image">
-                <div class="image-placeholder large">
-                    <i class="fas fa-user-circle"></i>
-                    <p>Your Profile Image</p>
-                </div>
+        <div class="about-header">
+            <h1 class="page-title">Raymond Gao</h1>
+            <p class="page-subtitle">Computer Science Student at Fordham University</p>
+            <div class="contact-info-header">
+                <p><i class="fas fa-envelope"></i> RamonGao05@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> New York, New York</p>
             </div>
-            <div class="about-content">
-                <h2>Hello, I'm [Your Name]</h2>
-                <p>This is where you can write about yourself. Share your story, background, and what makes you unique.</p>
-                
-                <div class="about-details">
-                    <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Add your location here</p>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <div>
-                            <h3>Education</h3>
-                            <p>Add your education background</p>
-                        </div>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-heart"></i>
-                        <div>
-                            <h3>Interests</h3>
-                            <p>Add your hobbies and interests</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <section class="skills-section">
-            <h2>My Skills</h2>
-            <div class="skills-grid">
-                <!-- You can add your skills here -->
-                <div class="skill-item">
-                    <h3>Web Development</h3>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 90%"></div>
+        <div class="resume-grid">
+            <!-- Summary Section -->
+            <section class="resume-section">
+                <div class="section-header">
+                    <i class="fas fa-user-circle"></i>
+                    <h2>Professional Summary</h2>
+                </div>
+                <div class="section-content">
+                    <p>Computer Science undergraduate at Fordham University with a strong foundation in programming. Working with various technologies to build efficient and scalable solutions. Experience in 3D modeling, simulations, and hardware systems, and a strong interest in the physics of engineering and astronomy.</p>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="resume-section">
+                <div class="section-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>Education</h2>
+                </div>
+                <div class="section-content">
+                    <!-- Fordham University -->
+                    <div class="education-item">
+                        <div class="edu-header">
+                            <h3>Fordham University</h3>
+                            <span class="edu-date">August 2023 - Expected May 2027</span>
+                        </div>
+                        <div class="edu-details">
+                            <p class="edu-degree">Bachelor in Computer Science</p>
+                            <p class="edu-gpa">GPA: 3.84/4.00</p>
+                            <p class="edu-location"><i class="fas fa-map-marker-alt"></i> New York, New York</p>
+                        </div>
+                        <div class="edu-achievements">
+                            <h4>Relevant Coursework:</h4>
+                            <div class="coursework-tags">
+                                <span class="tag">Data Structures</span>
+                                <span class="tag">Algorithms</span>
+                                <span class="tag">Computer Systems</span>
+                                <span class="tag">Database Systems</span>
+                                <span class="tag">Software Engineering</span>
+                                <span class="tag">Linear Algebra</span>
+                                <span class="tag">Discrete Mathematics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NYC College of Technology -->
+                    <div class="education-item">
+                        <div class="edu-header">
+                            <h3>New York City College of Technology</h3>
+                            <span class="edu-date">May 2025 - June 2025</span>
+                        </div>
+                        <div class="edu-details">
+                            <p class="edu-degree">Summer Course</p>
+                            <p class="edu-gpa">GPA: 4.00/4.00</p>
+                            <p class="edu-location"><i class="fas fa-map-marker-alt"></i> New York, New York</p>
+                        </div>
+                    </div>
+
+                    <!-- NYC Museum School -->
+                    <div class="education-item">
+                        <div class="edu-header">
+                            <h3>New York City Museum School</h3>
+                            <span class="edu-date">September 2020 - June 2023</span>
+                        </div>
+                        <div class="edu-details">
+                            <p class="edu-degree">High School Diploma</p>
+                            <p class="edu-gpa">GPA: 4.00/4.00</p>
+                            <p class="edu-location"><i class="fas fa-map-marker-alt"></i> New York, New York</p>
+                        </div>
+                        <div class="edu-achievements">
+                            <h4>Achievements:</h4>
+                            <ul class="achievement-list">
+                                <li>Graduated with perfect GPA</li>
+                                <li>STEM-focused curriculum with museum-based learning</li>
+                                <li>Early exposure to programming and technology</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="skill-item">
-                    <h3>UI/UX Design</h3>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 80%"></div>
-                    </div>
+            </section>
+
+            <!-- Technical Skills Preview -->
+            <section class="resume-section">
+                <div class="section-header">
+                    <i class="fas fa-code"></i>
+                    <h2>Technical Skills</h2>
                 </div>
-                <div class="skill-item">
-                    <h3>Project Management</h3>
-                    <div class="skill-bar">
-                        <div class="skill-level" style="width: 85%"></div>
+                <div class="section-content">
+                    <div class="skills-preview">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-laptop-code"></i> Programming Languages</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">C/C++</span>
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">HTML/CSS</span>
+                                <span class="skill-tag">R</span>
+                                <span class="skill-tag">Lean</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-tools"></i> Developer Tools</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">VS Code</span>
+                                <span class="skill-tag">DBeaver</span>
+                                <span class="skill-tag">MATLAB</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-paint-brush"></i> Applications</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Blender</span>
+                                <span class="skill-tag">Godot</span>
+                                <span class="skill-tag">Krita</span>
+                                <span class="skill-tag">Unreal Engine</span>
+                                <span class="skill-tag">Unity</span>
+                            </div>
+                        </div>
                     </div>
+                    <a href="projects.html" class="btn btn-primary view-all-skills">
+                        <i class="fas fa-arrow-right"></i> View Full Skills & Projects
+                    </a>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <!-- Download Resume -->
+            <section class="resume-section">
+                <div class="section-header">
+                    <i class="fas fa-file-download"></i>
+                    <h2>Resume Download</h2>
+                </div>
+                <div class="section-content">
+                    <p>Download a PDF version of my complete resume for offline viewing.</p>
+                    <a href="assets/resume.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Download Resume (PDF)
+                    </a>
+                    <p class="small-note">*Upload your resume to the assets folder as resume.pdf</p>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+            <p>&copy; 2024 Raymond Gao. All rights reserved.</p>
             <div class="social-links">
+                <a href="mailto:RamonGao05@gmail.com"><i class="fas fa-envelope"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
