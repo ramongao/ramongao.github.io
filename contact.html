@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">Portfolio</a>
+            <a href="index.html" class="logo">Ramon Gao</a>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
@@ -26,45 +26,64 @@
 
     <main class="container">
         <h1 class="page-title">Get In Touch</h1>
+        <p class="page-subtitle">Feel free to reach out for collaborations, opportunities, or just to say hello</p>
         
         <div class="contact-container">
             <div class="contact-info">
-                <h2>Contact Information</h2>
+                <h2><i class="fas fa-address-card"></i> Contact Information</h2>
+                
                 <div class="info-item">
                     <i class="fas fa-envelope"></i>
                     <div>
                         <h3>Email</h3>
-                        <p>Ramongao05@gmail.com</p>
+                        <p><a href="mailto:ramongao05@gmail.com">ramongao05@gmail.com</a></p>
                     </div>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <h3>Phone</h3>
-                        <p>+1 (929) 257-7745</p>
-                    </div>
-                </div>
+                
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
                         <h3>Location</h3>
-                        <p>Astoria, NY</p>
+                        <p>New York, New York</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h3>Education</h3>
+                        <p>Fordham University<br>Computer Science, Expected 2027</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3>Response Time</h3>
+                        <p>Typically within 24 hours</p>
                     </div>
                 </div>
                 
                 <div class="social-contact">
-                    <h3>Connect with me</h3>
+                    <h3><i class="fas fa-share-alt"></i> Connect With Me</h3>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:ramongao05@gmail.com" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
                     </div>
                 </div>
             </div>
             
             <div class="contact-form">
-                <h2>Send Me a Message</h2>
+                <h2><i class="fas fa-paper-plane"></i> Send Me a Message</h2>
+                <p class="form-description">All messages will be sent directly to my email: <strong>ramongao05@gmail.com</strong></p>
+                
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">
@@ -76,62 +95,170 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">
-                                <i class="fas fa-envelope"></i> Email Address *
+                                <i class="fas fa-envelope"></i> Your Email *
                             </label>
                             <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                         </div>
                         
                         <div class="form-group">
-                            <label for="phone">
-                                <i class="fas fa-phone"></i> Phone Number
+                            <label for="subject">
+                                <i class="fas fa-tag"></i> Subject
                             </label>
-                            <input type="tel" id="phone" name="phone" placeholder="+1 (123) 456-7890">
+                            <select id="subject" name="subject">
+                                <option value="">Select a topic</option>
+                                <option value="project">Project Collaboration</option>
+                                <option value="opportunity">Job Opportunity</option>
+                                <option value="question">Technical Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">
-                            <i class="fas fa-tag"></i> Subject
-                        </label>
-                        <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
                     </div>
                     
                     <div class="form-group">
                         <label for="message">
                             <i class="fas fa-comment"></i> Your Message *
                         </label>
-                        <textarea id="message" name="message" required rows="5" placeholder="Please type your message here..."></textarea>
+                        <textarea id="message" name="message" required rows="6" placeholder="Please type your message here..."></textarea>
                     </div>
                     
                     <div class="form-group">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="newsletter" name="newsletter">
-                            <label for="newsletter">Subscribe to my newsletter for updates</label>
+                            <input type="checkbox" id="copy" name="copy" checked>
+                            <label for="copy">Send me a copy of this message</label>
                         </div>
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-full">
-                        <i class="fas fa-paper-plane"></i> Send Message
+                        <i class="fas fa-paper-plane"></i> Send Message via Email
                     </button>
                     
-                    <p class="form-note">* Required fields</p>
+                    <p class="form-note">* Required fields. Message will open in your email client.</p>
                 </form>
+                
+                <div class="email-direct">
+                    <h3><i class="fas fa-envelope-open"></i> Or Email Directly</h3>
+                    <p>Prefer to write directly? Use the button below:</p>
+                    <a href="mailto:ramongao05@gmail.com?subject=Portfolio%20Contact&body=Hi%20Ramon,%0A%0AI%20saw%20your%20portfolio%20and%20wanted%20to%20connect..." 
+                       class="btn btn-secondary btn-full">
+                        <i class="fas fa-envelope"></i> Open Email Client
+                    </a>
+                </div>
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025. All rights reserved.</p>
+            <p>&copy; 2025 Ramon Gao. All rights reserved.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:ramongao05@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value.trim();
+                const sendCopy = document.getElementById('copy').checked;
+                
+                // Validation
+                if (!name || !email || !message) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                // Prepare email content
+                const emailSubject = subject ? `${subject} - Portfolio Contact` : 'Portfolio Contact Form';
+                let emailBody = `Name: ${name}%0A`;
+                emailBody += `Email: ${email}%0A`;
+                emailBody += `Subject: ${subject || 'Not specified'}%0A%0A`;
+                emailBody += `Message:%0A${message}%0A%0A`;
+                emailBody += `---%0ASent from your portfolio website`;
+                
+                // Prepare CC (if send copy is checked)
+                const cc = sendCopy ? `&cc=${email}` : '';
+                
+                // Create mailto link
+                const mailtoLink = `mailto:ramongao05@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}${cc}`;
+                
+                // Show confirmation
+                const confirmation = confirm(`This will open your email client to send a message to ramongao05@gmail.com.\n\nClick OK to continue.`);
+                
+                if (confirmation) {
+                    // Open email client
+                    window.location.href = mailtoLink;
+                    
+                    // Show success message
+                    setTimeout(() => {
+                        alert('Email client opened! Please send the email to complete the process.');
+                        contactForm.reset();
+                    }, 500);
+                }
+            });
+            
+            // Direct email button enhancement
+            const directEmailBtn = document.querySelector('.email-direct .btn');
+            if (directEmailBtn) {
+                directEmailBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    const confirmation = confirm('Open email client to write to ramongao05@gmail.com?');
+                    if (confirmation) {
+                        window.location.href = href;
+                    }
+                });
+            }
+            
+            // Auto-fill subject based on selection
+            const subjectSelect = document.getElementById('subject');
+            subjectSelect.addEventListener('change', function() {
+                if (this.value) {
+                    // Optional: You can pre-fill message based on subject
+                    const messageBox = document.getElementById('message');
+                    if (messageBox.value === '') {
+                        const templates = {
+                            'project': 'I would like to discuss a potential project collaboration...',
+                            'opportunity': 'I have an opportunity that might interest you...',
+                            'question': 'I have a question about your work on...',
+                            'feedback': 'I wanted to provide feedback on your portfolio...',
+                            'other': 'I would like to get in touch about...'
+                        };
+                        if (templates[this.value]) {
+                            messageBox.value = templates[this.value];
+                        }
+                    }
+                }
+            });
+            
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
