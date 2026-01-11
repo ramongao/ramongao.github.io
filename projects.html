@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">Raymond Gao</a>
+            <a href="index.html" class="logo">Ramon Gao</a>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
@@ -36,6 +36,29 @@
                     <span><i class="fas fa-calendar"></i> September 2025 - January 2026</span>
                     <span><i class="fas fa-map-marker-alt"></i> Fordham University, New York</span>
                 </div>
+            </div>
+            
+            <!-- Video Player -->
+            <div class="project-video-wrapper">
+                <div class="video-container">
+                    <video class="project-video" controls poster="assets/videos/fire-preview.jpg">
+                        <source src="assets/videos/fire-drone-simulation.mp4" type="video/mp4">
+                        <source src="assets/videos/fire-drone-simulation.webm" type="video/webm">
+                        Your browser doesn't support the video tag.
+                    </video>
+                    <div class="video-controls">
+                        <button class="video-btn play-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="video-btn fullscreen-btn">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <div class="video-time">
+                            <span class="current-time">0:00</span> / <span class="duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="video-caption">Real-time simulation showing drone swarm tracking fire spread with collision avoidance</p>
             </div>
             
             <div class="project-description">
@@ -109,7 +132,7 @@ frame_count = 0
 NUM_DRONES = 5
 DRONE_SPEED = 2.2
 VIEW_RADIUS = 150
-MIN_DRONE_DISTANCE = 160   # HARD separation constraint
+MIN_DRONE_DISTANCE = 160
 REPULSION_STRENGTH = 300
 
 class Drone:
@@ -121,7 +144,7 @@ class Drone:
     def update(self, frontier, drones):
         fx, fy = 0, 0
 
-        # ---- Assign spatially separated frontier targets ----
+        # Assign spatially separated frontier targets
         if frontier:
             target = frontier[(self.id * len(frontier)) // NUM_DRONES]
             tx, ty = target
@@ -134,7 +157,7 @@ class Drone:
                 fx += dx / dist
                 fy += dy / dist
 
-        # ---- HARD separation enforcement ----
+        # HARD separation enforcement
         for d in drones:
             if d is self:
                 continue
@@ -147,7 +170,7 @@ class Drone:
                 fx += dx * strength
                 fy += dy * strength
 
-        # ---- Move ----
+        # Move
         mag = math.hypot(fx, fy)
         if mag > 0:
             self.x += DRONE_SPEED * fx / mag
@@ -164,10 +187,10 @@ class Drone:
         )
         pygame.draw.circle(screen, BLUE, (int(self.x), int(self.y)), 6)
 
-# ================= CREATE DRONES =================
+# Create drones
 drones = [Drone(i) for i in range(NUM_DRONES)]
 
-# ================= FIRE UPDATE =================
+# Fire update function
 def update_fire():
     global frame_count
     frame_count += 1
@@ -193,7 +216,7 @@ def update_fire():
 
     return frontier
 
-# ================= MAIN LOOP =================
+# Main loop
 run = True
 while run:
     clock.tick(30)
@@ -205,7 +228,7 @@ while run:
 
     frontier = update_fire()
 
-    # ---- Draw fire ----
+    # Draw fire
     for x in range(GRID_WIDTH):
         for y in range(GRID_HEIGHT):
             if grid[x][y] == 1:
@@ -219,7 +242,7 @@ while run:
                     (x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
                 )
 
-    # ---- Update drones ----
+    # Update drones
     for drone in drones:
         drone.update(frontier, drones)
         drone.draw()
@@ -638,10 +661,8 @@ def main():
             for p in products:
                 print(f"ID: {p['product_id']} - {p['name']}")
                 print(f"  Price: ${p['price']}")
-                # Only show min_stock if it exists
                 if 'min_stock' in p:
                     print(f"  Min stock: {p['min_stock']}")
-                # Only show supplier_id if it exists  
                 if 'supplier_id' in p:
                     print(f"  Supplier ID: {p['supplier_id']}")
 
@@ -676,19 +697,16 @@ if __name__ == "__main__":
                 <div class="tab-content" id="sql-tab">
                     <div class="code-container">
                         <pre><code class="language-sql">SET FOREIGN_KEY_CHECKS = 0;
--- Create database and tables
 CREATE DATABASE IF NOT EXISTS supply_chain;
 USE supply_chain;
 
--- Suppliers
-CREATE TABLE IF NOT EXISTS suppliers (
+CREATE TABLE suppliers (
     supplier_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     contact VARCHAR(100)
 );
 
--- Products
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE products (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     supplier_id INT,
@@ -697,14 +715,12 @@ CREATE TABLE IF NOT EXISTS products (
     FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)
 );
 
--- Warehouses
-CREATE TABLE IF NOT EXISTS warehouses (
+CREATE TABLE warehouses (
     warehouse_id INT PRIMARY KEY AUTO_INCREMENT,
     location VARCHAR(100) NOT NULL
 );
 
--- Inventory
-CREATE TABLE IF NOT EXISTS inventory (
+CREATE TABLE inventory (
     warehouse_id INT,
     product_id INT,
     quantity INT DEFAULT 0,
@@ -713,8 +729,7 @@ CREATE TABLE IF NOT EXISTS inventory (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
--- Shipments
-CREATE TABLE IF NOT EXISTS shipments (
+CREATE TABLE shipments (
     shipment_id INT PRIMARY KEY AUTO_INCREMENT,
     from_wh INT,
     to_wh INT,
@@ -727,141 +742,39 @@ CREATE TABLE IF NOT EXISTS shipments (
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
--- Clear any existing data
+-- Sample data
 DELETE FROM shipments;
 DELETE FROM inventory;
 DELETE FROM warehouses;
 DELETE FROM products;
 DELETE FROM suppliers;
 
--- Insert more suppliers
 INSERT INTO suppliers (name, contact) VALUES
 ('Tech Suppliers Inc', 'sales@techsuppliers.com'),
 ('Office World Co', 'orders@officeworld.com'),
-('Global Electronics', 'contact@globalelectronics.com'),
-('Furniture Depot', 'info@furnituredepot.com'),
-('Computer Parts Ltd', 'support@computerparts.com'),
-('Stationery Express', 'sales@stationeryexpress.com');
+('Global Electronics', 'contact@globalelectronics.com');
 
--- Insert more products
 INSERT INTO products (name, supplier_id, price, min_stock) VALUES
--- Tech products
 ('Laptop Pro', 1, 1299.99, 5),
 ('Business Laptop', 1, 899.99, 8),
-('Gaming Laptop', 1, 1799.99, 3),
 ('24-inch Monitor', 1, 299.99, 10),
-('27-inch Monitor', 1, 399.99, 7),
 ('Mechanical Keyboard', 3, 89.99, 15),
-('Wireless Mouse', 3, 29.99, 20),
-('Webcam HD', 3, 79.99, 12),
+('Wireless Mouse', 3, 29.99, 20);
 
--- Office products
-('Office Chair', 2, 199.99, 8),
-('Executive Chair', 2, 349.99, 4),
-('Desk Lamp', 2, 39.99, 15),
-('Filing Cabinet', 4, 129.99, 6),
-('Conference Table', 4, 599.99, 2),
-
--- Computer parts
-('16GB RAM', 5, 89.99, 25),
-('1TB SSD', 5, 129.99, 18),
-('Power Supply', 5, 79.99, 12),
-
--- Stationery
-('Notebook Pack', 6, 19.99, 30),
-('Pen Set', 6, 14.99, 40),
-('Stapler', 6, 9.99, 25);
-
--- Insert more warehouses
 INSERT INTO warehouses (location) VALUES
 ('New York HQ'),
 ('Chicago Distribution'),
-('Los Angeles West'),
-('Miami South'),
-('Seattle Northwest'),
-('Dallas Central'),
-('Boston Northeast'),
-('Atlanta Southeast');
+('Los Angeles West');
 
--- Insert more inventory data
 INSERT INTO inventory (warehouse_id, product_id, quantity) VALUES
--- New York HQ (warehouse 1)
-(1, 1, 12),   -- Laptop Pro
-(1, 4, 18),   -- 24-inch Monitor
-(1, 9, 8),    -- Office Chair
-(1, 16, 32),  -- 16GB RAM
-(1, 19, 45),  -- Notebook Pack
+(1, 1, 12), (1, 3, 18), (1, 5, 45),
+(2, 2, 15), (2, 4, 9), (2, 5, 38),
+(3, 3, 6), (3, 4, 24), (3, 5, 28);
 
--- Chicago Distribution (warehouse 2)
-(2, 2, 15),   -- Business Laptop
-(2, 5, 9),    -- 27-inch Monitor
-(2, 10, 5),   -- Executive Chair
-(2, 17, 22),  -- 1TB SSD
-(2, 20, 38),  -- Pen Set
-
--- Los Angeles West (warehouse 3)
-(3, 3, 6),    -- Gaming Laptop
-(3, 6, 24),   -- Mechanical Keyboard
-(3, 11, 17),  -- Desk Lamp
-(3, 18, 14),  -- Power Supply
-(3, 21, 28),  -- Stapler
-
--- Miami South (warehouse 4)
-(4, 1, 9),    -- Laptop Pro
-(4, 7, 31),   -- Wireless Mouse
-(4, 12, 4),   -- Filing Cabinet
-(4, 16, 19),  -- 16GB RAM
-(4, 19, 22),  -- Notebook Pack
-
--- Seattle Northwest (warehouse 5)
-(5, 4, 7),    -- 24-inch Monitor (LOW STOCK)
-(5, 8, 11),   -- Webcam HD
-(5, 13, 3),   -- Conference Table (LOW STOCK)
-(5, 17, 16),  -- 1TB SSD
-(5, 20, 42),  -- Pen Set
-
--- Dallas Central (warehouse 6)
-(6, 2, 11),   -- Business Laptop
-(6, 5, 6),    -- 27-inch Monitor (LOW STOCK)
-(6, 9, 14),   -- Office Chair
-(6, 18, 8),   -- Power Supply (LOW STOCK)
-(6, 21, 19),  -- Stapler
-
--- Boston Northeast (warehouse 7)
-(7, 3, 4),    -- Gaming Laptop (LOW STOCK)
-(7, 6, 18),   -- Mechanical Keyboard
-(7, 10, 7),   -- Executive Chair
-(7, 16, 27),  -- 16GB RAM
-(7, 19, 33),  -- Notebook Pack
-
--- Atlanta Southeast (warehouse 8)
-(8, 1, 8),    -- Laptop Pro
-(8, 7, 26),   -- Wireless Mouse
-(8, 11, 13),  -- Desk Lamp
-(8, 17, 11),  -- 1TB SSD
-(8, 20, 36);  -- Pen Set
-
--- Insert some shipments for testing
-INSERT INTO shipments (from_wh, to_wh, product_id, quantity, status, created) VALUES
--- Pending shipments
-(1, 2, 1, 3, 'pending', DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(2, 3, 2, 2, 'pending', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-(3, 4, 3, 1, 'pending', NOW()),
-
--- In transit/delivered shipments
-(4, 5, 4, 5, 'delivered', DATE_SUB(NOW(), INTERVAL 7 DAY)),
-(5, 6, 5, 3, 'delivered', DATE_SUB(NOW(), INTERVAL 5 DAY)),
-(6, 7, 6, 8, 'delivered', DATE_SUB(NOW(), INTERVAL 3 DAY)),
-(7, 8, 7, 4, 'delivered', DATE_SUB(NOW(), INTERVAL 2 DAY)),
-(8, 1, 8, 6, 'delivered', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-
--- More varied shipments
-(1, 3, 16, 10, 'delivered', DATE_SUB(NOW(), INTERVAL 10 DAY)),
-(2, 4, 17, 8, 'delivered', DATE_SUB(NOW(), INTERVAL 8 DAY)),
-(3, 5, 18, 5, 'delivered', DATE_SUB(NOW(), INTERVAL 6 DAY)),
-(4, 6, 19, 15, 'pending', DATE_SUB(NOW(), INTERVAL 1 DAY)),
-(5, 7, 20, 12, 'pending', DATE_SUB(NOW(), INTERVAL 12 HOUR));
-
+INSERT INTO shipments (from_wh, to_wh, product_id, quantity, status) VALUES
+(1, 2, 1, 3, 'pending'),
+(2, 3, 2, 2, 'pending'),
+(3, 1, 3, 1, 'pending');
 
 SET FOREIGN_KEY_CHECKS = 1;</code></pre>
                     </div>
@@ -869,43 +782,43 @@ SET FOREIGN_KEY_CHECKS = 1;</code></pre>
             </div>
         </section>
 
-        <!-- Simplified Programming Languages -->
+        <!-- Clean Technical Skills Section -->
         <section class="skills-section">
-            <h2><i class="fas fa-code"></i> Programming Languages & Tools</h2>
+            <h2><i class="fas fa-code"></i> Technical Skills</h2>
             
-            <div class="simple-languages">
-                <div class="language-category">
+            <div class="simple-skills">
+                <div class="skill-category">
                     <h3><i class="fas fa-laptop-code"></i> Languages</h3>
-                    <div class="language-tags">
-                        <span class="lang-tag">Python</span>
-                        <span class="lang-tag">C/C++</span>
-                        <span class="lang-tag">MySQL</span>
-                        <span class="lang-tag">JavaScript</span>
-                        <span class="lang-tag">HTML/CSS</span>
-                        <span class="lang-tag">R</span>
-                        <span class="lang-tag">Lean</span>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C/C++</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">R</span>
+                        <span class="skill-tag">Lean</span>
                     </div>
                 </div>
                 
-                <div class="language-category">
+                <div class="skill-category">
                     <h3><i class="fas fa-tools"></i> Developer Tools</h3>
-                    <div class="language-tags">
-                        <span class="lang-tag">Docker</span>
-                        <span class="lang-tag">VS Code</span>
-                        <span class="lang-tag">DBeaver</span>
-                        <span class="lang-tag">MATLAB</span>
-                        <span class="lang-tag">Git</span>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">DBeaver</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Git</span>
                     </div>
                 </div>
                 
-                <div class="language-category">
+                <div class="skill-category">
                     <h3><i class="fas fa-paint-brush"></i> Applications</h3>
-                    <div class="language-tags">
-                        <span class="lang-tag">Blender</span>
-                        <span class="lang-tag">Godot</span>
-                        <span class="lang-tag">Krita</span>
-                        <span class="lang-tag">Unreal Engine</span>
-                        <span class="lang-tag">Unity</span>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Blender</span>
+                        <span class="skill-tag">Godot</span>
+                        <span class="skill-tag">Krita</span>
+                        <span class="skill-tag">Unreal Engine</span>
+                        <span class="skill-tag">Unity</span>
                     </div>
                 </div>
             </div>
@@ -914,7 +827,7 @@ SET FOREIGN_KEY_CHECKS = 1;</code></pre>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Raymond Gao. All rights reserved.</p>
+            <p>&copy; 2025 Ramon Gao. All rights reserved.</p>
             <div class="social-links">
                 <a href="mailto:RamonGao05@gmail.com"><i class="fas fa-envelope"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -951,14 +864,66 @@ SET FOREIGN_KEY_CHECKS = 1;</code></pre>
                 block.addEventListener('click', function() {
                     const code = this.textContent;
                     navigator.clipboard.writeText(code).then(() => {
-                        const originalText = this.dataset.originalText || this.textContent;
-                        this.textContent = 'Copied to clipboard!';
+                        const originalText = this.textContent;
+                        this.textContent = '✓ Copied!';
                         setTimeout(() => {
                             this.textContent = originalText;
                         }, 2000);
                     });
                 });
             });
+            
+            // Video player controls
+            const video = document.querySelector('.project-video');
+            const playBtn = document.querySelector('.play-btn');
+            const fullscreenBtn = document.querySelector('.fullscreen-btn');
+            const currentTimeEl = document.querySelector('.current-time');
+            const durationEl = document.querySelector('.duration');
+            
+            if (video && playBtn) {
+                // Format time
+                function formatTime(seconds) {
+                    const mins = Math.floor(seconds / 60);
+                    const secs = Math.floor(seconds % 60);
+                    return `${mins}:${secs.toString().padStart(2, '0')}`;
+                }
+                
+                // Update time display
+                video.addEventListener('loadedmetadata', () => {
+                    durationEl.textContent = formatTime(video.duration);
+                });
+                
+                video.addEventListener('timeupdate', () => {
+                    currentTimeEl.textContent = formatTime(video.currentTime);
+                });
+                
+                // Play/pause button
+                playBtn.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    } else {
+                        video.pause();
+                        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                });
+                
+                // Fullscreen button
+                fullscreenBtn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        video.parentElement.requestFullscreen().catch(err => {
+                            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                });
+                
+                // Update play button when video ends
+                video.addEventListener('ended', () => {
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                });
+            }
         });
     </script>
 </body>
