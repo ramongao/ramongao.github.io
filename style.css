@@ -1285,3 +1285,86 @@ body {
 
 .contact-form h2 {
     margin-bottom: 1.5rem;
+
+/* ================= VIDEO PLAYER STYLES ================= */
+.project-video-wrapper {
+    margin: 2rem 0;
+}
+
+.video-container {
+    position: relative;
+    background: #000;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-video {
+    width: 100%;
+    display: block;
+    max-height: 600px;
+    object-fit: contain;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-container:hover .video-controls {
+    opacity: 1;
+}
+
+.video-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.video-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.video-time {
+    color: white;
+    font-size: 0.9rem;
+    margin-left: auto;
+    font-family: monospace;
+}
+
+.video-caption {
+    text-align: center;
+    color: var(--gray-color);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Responsive video */
+@media (max-width: 768px) {
+    .project-video {
+        max-height: 400px;
+    }
+    
+    .video-controls {
+        opacity: 1; /* Always show on mobile */
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
