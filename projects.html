@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">Ramon Gao</a>
+            <a href="index.html" class="logo">Raymond Gao</a>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
@@ -25,336 +25,887 @@
     </nav>
 
     <main class="container">
-        <h1 class="page-title">Projects & Technical Skills</h1>
-        <p class="page-subtitle">Showcasing my work in simulation, database systems, and software development</p>
+        <h1 class="page-title">Projects</h1>
+        <p class="page-subtitle">Showcasing my work in simulation and database systems</p>
         
-        <!-- Projects Section -->
-        <section class="projects-section">
-            <h2><i class="fas fa-code-branch"></i> Featured Projects</h2>
+        <!-- Project 1: Wildfire Drone Simulation -->
+        <section class="project-section">
+            <div class="project-header">
+                <h2><i class="fas fa-fire"></i> Wildfire Drone Coverage Simulation</h2>
+                <div class="project-meta">
+                    <span><i class="fas fa-calendar"></i> September 2025 - January 2026</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Fordham University, New York</span>
+                </div>
+            </div>
             
-            <div class="projects-grid">
-                <!-- Wildfire Drone Simulation -->
-                <div class="project-card project-card-featured">
-                    <div class="project-video-container">
-                        <video class="project-video" controls poster="assets/videos/fire-preview.jpg">
-                            <source src="assets/videos/fire-drone-simulation.mp4" type="video/mp4">
-                            Your browser doesn't support video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="project-content">
-                        <div class="project-badge">
-                            <span class="badge"><i class="fas fa-star"></i> Featured</span>
-                            <span class="badge"><i class="fab fa-python"></i> Python</span>
-                            <span class="badge"><i class="fas fa-fire"></i> Simulation</span>
-                            <span class="badge"><i class="fas fa-university"></i> Fordham University</span>
-                        </div>
-                        
-                        <h3>Wildfire Drone Optimization Simulation</h3>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> September 2025 - January 2026</span>
-                            <span><i class="fas fa-map-marker-alt"></i> New York, New York</span>
-                        </div>
-                        
-                        <p class="project-description">
-                            A Pygame simulation modeling drone swarm coverage of spreading forest fires with spatial separation constraints. Features fire propagation, drone AI behavior, and optimization algorithms.
-                        </p>
-                        
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Pygame</span>
-                            <span class="tech-tag">Algorithm Design</span>
-                            <span class="tech-tag">Simulation</span>
-                            <span class="tech-tag">AI Pathfinding</span>
-                            <span class="tech-tag">Vector Math</span>
-                        </div>
-                        
-                        <div class="project-features">
-                            <h4><i class="fas fa-cogs"></i> Key Accomplishments:</h4>
-                            <ul>
-                                <li>Developed wildfire spread simulation using Pygame with physical fire propagation dynamics</li>
-                                <li>Integrated energy transfer and stochastic burn modeling on a grid environment optimized for performance</li>
-                                <li>Implemented multi agent drone surveillance system with independent movement and collision avoidance</li>
-                                <li>Applied adaptive trajectory planning to maximize visual coverage</li>
-                                <li>Utilized optimization principles and control strategies to coordinate multiple agents</li>
-                                <li>Improved coverage efficiency and stability while analyzing system responses under random fire spawn locations</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-links">
-                            <button class="btn btn-small btn-primary show-demo-btn">
-                                <i class="fas fa-play"></i> Watch Demo
-                            </button>
-                            <button class="btn btn-small btn-secondary show-code-btn">
-                                <i class="fas fa-code"></i> View Code
-                            </button>
-                        </div>
+            <div class="project-description">
+                <p>A Pygame simulation modeling drone swarm coverage of spreading forest fires with spatial separation constraints and real-time fire propagation.</p>
+                
+                <div class="project-features">
+                    <h3><i class="fas fa-cogs"></i> Key Features:</h3>
+                    <ul>
+                        <li>Real-time fire spread using cellular automata</li>
+                        <li>Multi-drone coordination with collision avoidance</li>
+                        <li>Frontier-based target assignment algorithm</li>
+                        <li>Vector-based movement and repulsion forces</li>
+                        <li>Visual feedback system with coverage visualization</li>
+                    </ul>
+                </div>
+                
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pygame</span>
+                    <span class="tech-tag">Algorithms</span>
+                    <span class="tech-tag">Simulation</span>
+                    <span class="tech-tag">Vector Math</span>
+                </div>
+            </div>
+            
+            <!-- Pygame Code Display -->
+            <div class="code-display-section">
+                <h3><i class="fas fa-code"></i> Python/Pygame Code</h3>
+                <div class="code-container">
+                    <pre><code class="language-python">import pygame
+import random
+import math
+
+pygame.init()
+
+# ================= SCREEN =================
+SCREEN_WIDTH = 1300
+SCREEN_HEIGHT = 800
+CELL_SIZE = 6
+
+GRID_WIDTH = SCREEN_WIDTH // CELL_SIZE
+GRID_HEIGHT = SCREEN_HEIGHT // CELL_SIZE
+
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Forest Fire Drone Coverage")
+
+clock = pygame.time.Clock()
+
+# ================= COLORS =================
+GREEN = (34, 139, 34)
+RED = (255, 70, 70)
+DARK_RED = (120, 0, 0)
+BLUE = (30, 144, 255)
+LIGHT_BLUE = (135, 206, 250)
+
+# ================= FIRE GRID =================
+grid = [[0 for _ in range(GRID_HEIGHT)] for _ in range(GRID_WIDTH)]
+burn_time = [[0 for _ in range(GRID_HEIGHT)] for _ in range(GRID_WIDTH)]
+
+# Initial fire
+ix = random.randint(20, GRID_WIDTH - 20)
+iy = random.randint(20, GRID_HEIGHT - 20)
+grid[ix][iy] = 1
+
+FIRE_SPREAD_CHANCE = 0.08
+BURN_DURATION = 80
+SPREAD_INTERVAL = 6
+frame_count = 0
+
+# ================= DRONES =================
+NUM_DRONES = 5
+DRONE_SPEED = 2.2
+VIEW_RADIUS = 150
+MIN_DRONE_DISTANCE = 160   # HARD separation constraint
+REPULSION_STRENGTH = 300
+
+class Drone:
+    def __init__(self, idx):
+        self.id = idx
+        self.x = random.randint(0, SCREEN_WIDTH)
+        self.y = random.randint(0, SCREEN_HEIGHT)
+
+    def update(self, frontier, drones):
+        fx, fy = 0, 0
+
+        # ---- Assign spatially separated frontier targets ----
+        if frontier:
+            target = frontier[(self.id * len(frontier)) // NUM_DRONES]
+            tx, ty = target
+
+            dx = tx - self.x
+            dy = ty - self.y
+            dist = math.hypot(dx, dy)
+
+            if dist > VIEW_RADIUS * 0.7:
+                fx += dx / dist
+                fy += dy / dist
+
+        # ---- HARD separation enforcement ----
+        for d in drones:
+            if d is self:
+                continue
+            dx = self.x - d.x
+            dy = self.y - d.y
+            dist = math.hypot(dx, dy)
+
+            if dist < MIN_DRONE_DISTANCE and dist > 0:
+                strength = REPULSION_STRENGTH / (dist ** 2)
+                fx += dx * strength
+                fy += dy * strength
+
+        # ---- Move ----
+        mag = math.hypot(fx, fy)
+        if mag > 0:
+            self.x += DRONE_SPEED * fx / mag
+            self.y += DRONE_SPEED * fy / mag
+
+        self.x = max(0, min(SCREEN_WIDTH, self.x))
+        self.y = max(0, min(SCREEN_HEIGHT, self.y))
+
+    def draw(self):
+        pygame.draw.circle(
+            screen, LIGHT_BLUE,
+            (int(self.x), int(self.y)),
+            VIEW_RADIUS, 1
+        )
+        pygame.draw.circle(screen, BLUE, (int(self.x), int(self.y)), 6)
+
+# ================= CREATE DRONES =================
+drones = [Drone(i) for i in range(NUM_DRONES)]
+
+# ================= FIRE UPDATE =================
+def update_fire():
+    global frame_count
+    frame_count += 1
+
+    frontier = []
+
+    for x in range(GRID_WIDTH):
+        for y in range(GRID_HEIGHT):
+            if grid[x][y] == 1:
+                burn_time[x][y] += 1
+                frontier.append((x * CELL_SIZE, y * CELL_SIZE))
+
+                # Spread only every SPREAD_INTERVAL frames
+                if frame_count % SPREAD_INTERVAL == 0:
+                    for dx, dy in [(-1,0),(1,0),(0,-1),(0,1)]:
+                        nx, ny = x + dx, y + dy
+                        if 0 <= nx < GRID_WIDTH and 0 <= ny < GRID_HEIGHT:
+                            if grid[nx][ny] == 0 and random.random() < FIRE_SPREAD_CHANCE:
+                                grid[nx][ny] = 1
+
+                if burn_time[x][y] > BURN_DURATION:
+                    grid[x][y] = 2
+
+    return frontier
+
+# ================= MAIN LOOP =================
+run = True
+while run:
+    clock.tick(30)
+    screen.fill(GREEN)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+    frontier = update_fire()
+
+    # ---- Draw fire ----
+    for x in range(GRID_WIDTH):
+        for y in range(GRID_HEIGHT):
+            if grid[x][y] == 1:
+                pygame.draw.rect(
+                    screen, RED,
+                    (x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+                )
+            elif grid[x][y] == 2:
+                pygame.draw.rect(
+                    screen, DARK_RED,
+                    (x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
+                )
+
+    # ---- Update drones ----
+    for drone in drones:
+        drone.update(frontier, drones)
+        drone.draw()
+
+    pygame.display.flip()
+
+pygame.quit()</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 2: Supply Chain Management System -->
+        <section class="project-section">
+            <div class="project-header">
+                <h2><i class="fas fa-database"></i> Supply Chain Management System</h2>
+                <div class="project-meta">
+                    <span><i class="fas fa-calendar"></i> October 2025 - December 2025</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Fordham University, New York</span>
+                </div>
+            </div>
+            
+            <div class="project-description">
+                <p>A comprehensive supply chain management system built with Python and MySQL for managing inventory, shipments, warehouses, and suppliers.</p>
+                
+                <div class="project-features">
+                    <h3><i class="fas fa-cogs"></i> Key Features:</h3>
+                    <ul>
+                        <li>Automated database setup and configuration</li>
+                        <li>Real-time inventory tracking across multiple warehouses</li>
+                        <li>Transaction-safe shipment management</li>
+                        <li>Low stock alerts and automated restocking</li>
+                        <li>Interactive CLI interface for system management</li>
+                    </ul>
+                </div>
+                
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Database Design</span>
+                    <span class="tech-tag">JSON</span>
+                    <span class="tech-tag">CRUD Operations</span>
+                </div>
+            </div>
+            
+            <!-- Supply Chain Code Display -->
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="main">main.py</button>
+                    <button class="tab-button" data-tab="config">config.json</button>
+                    <button class="tab-button" data-tab="sql">schema.sql</button>
+                </div>
+                
+                <div class="tab-content active" id="main-tab">
+                    <div class="code-container">
+                        <pre><code class="language-python">import mysql.connector
+import json
+import os
+import sys
+
+class SupplyChain:
+    def __init__(self):
+        self.conn = None
+        self.config = self.load_config()
+        self.connect()
+    
+    def load_config(self):
+        """Load or create configuration"""
+        config_path = 'config.json'
+        
+        if not os.path.exists(config_path):
+            config = {
+                "database": {
+                    "host": "localhost",
+                    "name": "supply_chain",
+                    "user": "root",
+                    "password": ""
+                }
+            }
+            with open(config_path, 'w') as f:
+                json.dump(config, f, indent=2)
+            print("Config file created")
+            return config
+        
+        with open(config_path, 'r') as f:
+            return json.load(f)
+    
+    def connect(self):
+        """Connect to database"""
+        db = self.config['database']
+        host = db['host']
+        user = db['user']
+        password = db['password']
+        db_name = db['name']
+        
+        # Try connection, ask for password if needed
+        if not password:
+            import getpass
+            password = getpass.getpass("MySQL password (press Enter if none): ")
+        
+        try:
+            # Try to connect to existing database
+            self.conn = mysql.connector.connect(
+                host=host,
+                database=db_name,
+                user=user,
+                password=password,
+                autocommit=False
+            )
+            print(f"Connected to {db_name}")
+            
+        except mysql.connector.Error as e:
+            if e.errno == 1049:  # Database doesn't exist
+                print(f"Database {db_name} not found. Creating...")
+                self.create_database(host, user, password, db_name)
+            else:
+                print(f"Connection failed: {e}")
+                return
+    
+    def create_database(self, host, user, password, db_name):
+        """Create database and tables from SQL file"""
+        try:
+            # Connect without specifying database
+            temp_conn = mysql.connector.connect(
+                host=host,
+                user=user,
+                password=password
+            )
+            cursor = temp_conn.cursor()
+            
+            # Read and execute SQL file
+            sql_path = 'schema.sql'
+            
+            with open(sql_path, 'r') as f:
+                sql_content = f.read()
+            
+            # Execute each SQL statement
+            statements = sql_content.split(';')
+            for statement in statements:
+                statement = statement.strip()
+                if statement:  # Skip empty statements
+                    try:
+                        cursor.execute(statement)
+                    except Exception as e:
+                        print(f"Note: {e}")
+            
+            temp_conn.commit()
+            cursor.close()
+            temp_conn.close()
+            
+            # Connect to new database
+            self.conn = mysql.connector.connect(
+                host=host,
+                database=db_name,
+                user=user,
+                password=password,
+                autocommit=False
+            )
+            print(f"Database {db_name} created from SQL file")
+            return True
+            
+        except Exception as e:
+            print(f"Setup failed: {e}")
+            return False
+    
+    def close(self):
+        if self.conn:
+            self.conn.close()
+    
+    def query(self, sql, params=None):
+        """Execute query and return results"""
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(sql, params or ())
+        result = cursor.fetchall()
+        self.conn.commit()
+        cursor.close()
+        return result
+    
+    def execute(self, sql, params=None):
+        """Execute update/insert query"""
+        cursor = self.conn.cursor()
+        cursor.execute(sql, params or ())
+        self.conn.commit()
+        cursor.close()
+    
+    # Core functions
+    def create_shipment(self, from_id, to_id, product_id, quantity):
+        """Create a shipment"""
+        # Check stock
+        stock = self.query(
+            "SELECT quantity FROM inventory WHERE warehouse_id=%s AND product_id=%s",
+            (from_id, product_id)
+        )
+        
+        if not stock or stock[0]['quantity'] < quantity:
+            print(f"Insufficient stock. Available: {stock[0]['quantity'] if stock else 0}")
+            return False
+        
+        # Start transaction
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute("START TRANSACTION")
+            
+            # Create shipment
+            cursor.execute(
+                "INSERT INTO shipments (from_wh, to_wh, product_id, quantity) VALUES (%s, %s, %s, %s)",
+                (from_id, to_id, product_id, quantity)
+            )
+            
+            # Update inventory
+            cursor.execute(
+                "UPDATE inventory SET quantity=quantity-%s WHERE warehouse_id=%s AND product_id=%s",
+                (quantity, from_id, product_id)
+            )
+            
+            self.conn.commit()
+            cursor.close()
+            print("Shipment created")
+            return True
+            
+        except Exception as e:
+            self.conn.rollback()
+            print(f"Failed: {e}")
+            return False
+    
+    def deliver_shipment(self, shipment_id):
+        """Mark shipment as delivered"""
+        # Get shipment details
+        shipment = self.query(
+            "SELECT * FROM shipments WHERE shipment_id=%s AND status='pending'",
+            (shipment_id,)
+        )
+        
+        if not shipment:
+            print("Shipment not found or already delivered")
+            return False
+        
+        shipment = shipment[0]
+        
+        # Update shipment and inventory
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute("START TRANSACTION")
+            
+            # Update shipment status
+            cursor.execute(
+                "UPDATE shipments SET status='delivered' WHERE shipment_id=%s",
+                (shipment_id,)
+            )
+            
+            # Add to destination warehouse
+            cursor.execute(
+                """INSERT INTO inventory (warehouse_id, product_id, quantity) 
+                   VALUES (%s, %s, %s) 
+                   ON DUPLICATE KEY UPDATE quantity=quantity+VALUES(quantity)""",
+                (shipment['to_wh'], shipment['product_id'], shipment['quantity'])
+            )
+            
+            self.conn.commit()
+            cursor.close()
+            print("Shipment delivered")
+            return True
+            
+        except Exception as e:
+            self.conn.rollback()
+            print(f"Failed: {e}")
+            return False
+    
+    def check_low_stock(self):
+        """Check for low stock items"""
+        results = self.query("""
+            SELECT p.name, COALESCE(SUM(i.quantity), 0) as total, p.min_stock
+            FROM products p
+            LEFT JOIN inventory i ON p.product_id=i.product_id
+            GROUP BY p.product_id
+            HAVING total < p.min_stock
+        """)
+        
+        if results:
+            print("Low stock items:")
+            for r in results:
+                print(f"{r['name']}: {r['total']} (min: {r['min_stock']})")
+        else:
+            print("All items stocked")
+        
+        return results
+    
+    def view_inventory(self, warehouse_id=None):
+        """View inventory"""
+        if warehouse_id:
+            results = self.query("""
+                SELECT p.name, i.quantity, p.price
+                FROM inventory i
+                JOIN products p ON i.product_id=p.product_id
+                WHERE i.warehouse_id=%s
+            """, (warehouse_id,))
+            print(f"Inventory for warehouse {warehouse_id}:")
+        else:
+            results = self.query("""
+                SELECT w.location, p.name, SUM(i.quantity) as total
+                FROM inventory i
+                JOIN warehouses w ON i.warehouse_id=w.warehouse_id
+                JOIN products p ON i.product_id=p.product_id
+                GROUP BY w.location, p.name
+            """)
+            print("All inventory:")
+        
+        for r in results:
+            if 'location' in r:
+                print(f"{r['location']}: {r['name']} x{r['total']}")
+            else:
+                print(f"{r['name']}: {r['quantity']}")
+        
+        return results
+    
+    def view_shipments(self, status=None):
+        """View shipments"""
+        if status:
+            results = self.query("""
+                SELECT s.shipment_id, w1.location as from_loc, w2.location as to_loc,
+                       p.name, s.quantity, s.status
+                FROM shipments s
+                JOIN warehouses w1 ON s.from_wh=w1.warehouse_id
+                JOIN warehouses w2 ON s.to_wh=w2.warehouse_id
+                JOIN products p ON s.product_id=p.product_id
+                WHERE s.status=%s
+                ORDER BY s.created DESC
+                LIMIT 10
+            """, (status,))
+            print(f"Shipments ({status}):")
+        else:
+            results = self.query("""
+                SELECT s.shipment_id, w1.location as from_loc, w2.location as to_loc,
+                       p.name, s.quantity, s.status
+                FROM shipments s
+                JOIN warehouses w1 ON s.from_wh=w1.warehouse_id
+                JOIN warehouses w2 ON s.to_wh=w2.warehouse_id
+                JOIN products p ON s.product_id=p.product_id
+                ORDER BY s.created DESC
+                LIMIT 10
+            """)
+            print("Recent shipments:")
+        
+        for s in results:
+            print(f"#{s['shipment_id']}: {s['name']} x{s['quantity']} {s['from_loc']}->{s['to_loc']} ({s['status']})")
+        
+        return results
+    
+    def restock(self, warehouse_id, product_id, quantity):
+        """Add stock to inventory"""
+        try:
+            self.execute(
+                """INSERT INTO inventory (warehouse_id, product_id, quantity) 
+                   VALUES (%s, %s, %s) 
+                   ON DUPLICATE KEY UPDATE quantity=quantity+VALUES(quantity)""",
+                (warehouse_id, product_id, quantity)
+            )
+            print(f"Added {quantity} units")
+            return True
+        except Exception as e:
+            print(f"Failed: {e}")
+            return False
+    
+    def get_warehouses(self):
+        return self.query("SELECT warehouse_id, location FROM warehouses")
+    
+    def get_products(self):
+        return self.query("SELECT product_id, name, price, min_stock FROM products")
+
+def main():
+    print("\nSupply Chain System")
+    print("=" * 40)
+    
+    sc = SupplyChain()
+    if not sc.conn:
+        return
+    
+    while True:
+        print("\n1. View inventory")
+        print("2. View shipments")
+        print("3. Create shipment")
+        print("4. Deliver shipment")
+        print("5. Check low stock")
+        print("6. Restock")
+        print("7. View products")
+        print("8. View warehouses")
+        print("9. Exit")
+        
+        choice = input("\nChoice: ")
+        
+        if choice == '1':
+            wh = input("Warehouse ID (Enter for all): ")
+            sc.view_inventory(int(wh) if wh else None)
+        elif choice == '2':
+            status = input("Status filter (pending/delivered or Enter): ")
+            sc.view_shipments(status if status else None)
+        elif choice == '3':
+            frm = input("From warehouse: ")
+            to = input("To warehouse: ")
+            prod = input("Product: ")
+            qty = input("Quantity: ")
+            sc.create_shipment(int(frm), int(to), int(prod), int(qty))
+        elif choice == '4':
+            sid = input("Shipment ID: ")
+            sc.deliver_shipment(int(sid))
+        elif choice == '5':
+            sc.check_low_stock()
+        elif choice == '6':
+            wh = input("Warehouse: ")
+            prod = input("Product: ")
+            qty = input("Quantity: ")
+            sc.restock(int(wh), int(prod), int(qty))
+
+        elif choice == '7':
+            products = sc.get_products()
+            print("\nProducts:")
+            for p in products:
+                print(f"ID: {p['product_id']} - {p['name']}")
+                print(f"  Price: ${p['price']}")
+                # Only show min_stock if it exists
+                if 'min_stock' in p:
+                    print(f"  Min stock: {p['min_stock']}")
+                # Only show supplier_id if it exists  
+                if 'supplier_id' in p:
+                    print(f"  Supplier ID: {p['supplier_id']}")
+
+        elif choice == '8':
+            warehouses = sc.get_warehouses()
+            print("\nWarehouses:")
+            for w in warehouses:
+                print(f"ID: {w['warehouse_id']} - {w['location']}")
+        elif choice == '9':
+            break
+    
+    sc.close()
+
+if __name__ == "__main__":
+    main()</code></pre>
                     </div>
                 </div>
-
-                <!-- Supply Chain Management System -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-database fa-4x"></i>
+                
+                <div class="tab-content" id="config-tab">
+                    <div class="code-container">
+                        <pre><code class="language-json">{
+  "database": {
+    "host": "localhost",
+    "name": "supply_chain",
+    "user": "root",
+    "password": ""
+  }
+}</code></pre>
                     </div>
-                    
-                    <div class="project-content">
-                        <div class="project-badge">
-                            <span class="badge"><i class="fas fa-database"></i> Database</span>
-                            <span class="badge"><i class="fab fa-python"></i> Python</span>
-                            <span class="badge"><i class="fas fa-warehouse"></i> Logistics</span>
-                            <span class="badge"><i class="fas fa-university"></i> Fordham University</span>
-                        </div>
-                        
-                        <h3>Supply Chain Management System</h3>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> October 2025 - December 2025</span>
-                            <span><i class="fas fa-map-marker-alt"></i> New York, New York</span>
-                        </div>
-                        
-                        <p class="project-description">
-                            A comprehensive supply chain management system built with Python and MySQL. Manages inventory, shipments, warehouses, and suppliers with real-time tracking and automated stock management.
-                        </p>
-                        
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Database Design</span>
-                            <span class="tech-tag">JSON</span>
-                            <span class="tech-tag">CRUD Operations</span>
-                            <span class="tech-tag">Transaction Management</span>
-                        </div>
-                        
-                        <div class="project-features">
-                            <h4><i class="fas fa-cogs"></i> Key Accomplishments:</h4>
-                            <ul>
-                                <li>Developed MySQL based supply chain management system with normalized schema</li>
-                                <li>Implemented foreign key constraints, indexing, and stored procedures</li>
-                                <li>Created Python business logic for inventory validation, shipment creation, delivery processing</li>
-                                <li>Added low stock monitoring with automated alerts</li>
-                                <li>Integrated cascading constraints and audit timestamps</li>
-                                <li>Optimized queries to provide comprehensive inventory and shipment visibility</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-structure">
-                            <h4><i class="fas fa-folder"></i> Technology Stack:</h4>
-                            <div class="code-snippet">
-                                <pre><code class="language-python">
-# Backend: Python with MySQL connector
-# Database: MySQL with normalized schema
-# Configuration: JSON based config files
-# CLI: Interactive command line interface
-                                </code></pre>
-                            </div>
-                        </div>
-                        
-                        <div class="project-links">
-                            <button class="btn btn-small btn-secondary show-full-code-btn">
-                                <i class="fas fa-code"></i> View Code
-                            </button>
-                        </div>
+                </div>
+                
+                <div class="tab-content" id="sql-tab">
+                    <div class="code-container">
+                        <pre><code class="language-sql">SET FOREIGN_KEY_CHECKS = 0;
+-- Create database and tables
+CREATE DATABASE IF NOT EXISTS supply_chain;
+USE supply_chain;
+
+-- Suppliers
+CREATE TABLE IF NOT EXISTS suppliers (
+    supplier_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    contact VARCHAR(100)
+);
+
+-- Products
+CREATE TABLE IF NOT EXISTS products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    supplier_id INT,
+    price DECIMAL(10,2),
+    min_stock INT DEFAULT 10,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)
+);
+
+-- Warehouses
+CREATE TABLE IF NOT EXISTS warehouses (
+    warehouse_id INT PRIMARY KEY AUTO_INCREMENT,
+    location VARCHAR(100) NOT NULL
+);
+
+-- Inventory
+CREATE TABLE IF NOT EXISTS inventory (
+    warehouse_id INT,
+    product_id INT,
+    quantity INT DEFAULT 0,
+    PRIMARY KEY (warehouse_id, product_id),
+    FOREIGN KEY (warehouse_id) REFERENCES warehouses(warehouse_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+-- Shipments
+CREATE TABLE IF NOT EXISTS shipments (
+    shipment_id INT PRIMARY KEY AUTO_INCREMENT,
+    from_wh INT,
+    to_wh INT,
+    product_id INT,
+    quantity INT,
+    status VARCHAR(20) DEFAULT 'pending',
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (from_wh) REFERENCES warehouses(warehouse_id),
+    FOREIGN KEY (to_wh) REFERENCES warehouses(warehouse_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+-- Clear any existing data
+DELETE FROM shipments;
+DELETE FROM inventory;
+DELETE FROM warehouses;
+DELETE FROM products;
+DELETE FROM suppliers;
+
+-- Insert more suppliers
+INSERT INTO suppliers (name, contact) VALUES
+('Tech Suppliers Inc', 'sales@techsuppliers.com'),
+('Office World Co', 'orders@officeworld.com'),
+('Global Electronics', 'contact@globalelectronics.com'),
+('Furniture Depot', 'info@furnituredepot.com'),
+('Computer Parts Ltd', 'support@computerparts.com'),
+('Stationery Express', 'sales@stationeryexpress.com');
+
+-- Insert more products
+INSERT INTO products (name, supplier_id, price, min_stock) VALUES
+-- Tech products
+('Laptop Pro', 1, 1299.99, 5),
+('Business Laptop', 1, 899.99, 8),
+('Gaming Laptop', 1, 1799.99, 3),
+('24-inch Monitor', 1, 299.99, 10),
+('27-inch Monitor', 1, 399.99, 7),
+('Mechanical Keyboard', 3, 89.99, 15),
+('Wireless Mouse', 3, 29.99, 20),
+('Webcam HD', 3, 79.99, 12),
+
+-- Office products
+('Office Chair', 2, 199.99, 8),
+('Executive Chair', 2, 349.99, 4),
+('Desk Lamp', 2, 39.99, 15),
+('Filing Cabinet', 4, 129.99, 6),
+('Conference Table', 4, 599.99, 2),
+
+-- Computer parts
+('16GB RAM', 5, 89.99, 25),
+('1TB SSD', 5, 129.99, 18),
+('Power Supply', 5, 79.99, 12),
+
+-- Stationery
+('Notebook Pack', 6, 19.99, 30),
+('Pen Set', 6, 14.99, 40),
+('Stapler', 6, 9.99, 25);
+
+-- Insert more warehouses
+INSERT INTO warehouses (location) VALUES
+('New York HQ'),
+('Chicago Distribution'),
+('Los Angeles West'),
+('Miami South'),
+('Seattle Northwest'),
+('Dallas Central'),
+('Boston Northeast'),
+('Atlanta Southeast');
+
+-- Insert more inventory data
+INSERT INTO inventory (warehouse_id, product_id, quantity) VALUES
+-- New York HQ (warehouse 1)
+(1, 1, 12),   -- Laptop Pro
+(1, 4, 18),   -- 24-inch Monitor
+(1, 9, 8),    -- Office Chair
+(1, 16, 32),  -- 16GB RAM
+(1, 19, 45),  -- Notebook Pack
+
+-- Chicago Distribution (warehouse 2)
+(2, 2, 15),   -- Business Laptop
+(2, 5, 9),    -- 27-inch Monitor
+(2, 10, 5),   -- Executive Chair
+(2, 17, 22),  -- 1TB SSD
+(2, 20, 38),  -- Pen Set
+
+-- Los Angeles West (warehouse 3)
+(3, 3, 6),    -- Gaming Laptop
+(3, 6, 24),   -- Mechanical Keyboard
+(3, 11, 17),  -- Desk Lamp
+(3, 18, 14),  -- Power Supply
+(3, 21, 28),  -- Stapler
+
+-- Miami South (warehouse 4)
+(4, 1, 9),    -- Laptop Pro
+(4, 7, 31),   -- Wireless Mouse
+(4, 12, 4),   -- Filing Cabinet
+(4, 16, 19),  -- 16GB RAM
+(4, 19, 22),  -- Notebook Pack
+
+-- Seattle Northwest (warehouse 5)
+(5, 4, 7),    -- 24-inch Monitor (LOW STOCK)
+(5, 8, 11),   -- Webcam HD
+(5, 13, 3),   -- Conference Table (LOW STOCK)
+(5, 17, 16),  -- 1TB SSD
+(5, 20, 42),  -- Pen Set
+
+-- Dallas Central (warehouse 6)
+(6, 2, 11),   -- Business Laptop
+(6, 5, 6),    -- 27-inch Monitor (LOW STOCK)
+(6, 9, 14),   -- Office Chair
+(6, 18, 8),   -- Power Supply (LOW STOCK)
+(6, 21, 19),  -- Stapler
+
+-- Boston Northeast (warehouse 7)
+(7, 3, 4),    -- Gaming Laptop (LOW STOCK)
+(7, 6, 18),   -- Mechanical Keyboard
+(7, 10, 7),   -- Executive Chair
+(7, 16, 27),  -- 16GB RAM
+(7, 19, 33),  -- Notebook Pack
+
+-- Atlanta Southeast (warehouse 8)
+(8, 1, 8),    -- Laptop Pro
+(8, 7, 26),   -- Wireless Mouse
+(8, 11, 13),  -- Desk Lamp
+(8, 17, 11),  -- 1TB SSD
+(8, 20, 36);  -- Pen Set
+
+-- Insert some shipments for testing
+INSERT INTO shipments (from_wh, to_wh, product_id, quantity, status, created) VALUES
+-- Pending shipments
+(1, 2, 1, 3, 'pending', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(2, 3, 2, 2, 'pending', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+(3, 4, 3, 1, 'pending', NOW()),
+
+-- In transit/delivered shipments
+(4, 5, 4, 5, 'delivered', DATE_SUB(NOW(), INTERVAL 7 DAY)),
+(5, 6, 5, 3, 'delivered', DATE_SUB(NOW(), INTERVAL 5 DAY)),
+(6, 7, 6, 8, 'delivered', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+(7, 8, 7, 4, 'delivered', DATE_SUB(NOW(), INTERVAL 2 DAY)),
+(8, 1, 8, 6, 'delivered', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+
+-- More varied shipments
+(1, 3, 16, 10, 'delivered', DATE_SUB(NOW(), INTERVAL 10 DAY)),
+(2, 4, 17, 8, 'delivered', DATE_SUB(NOW(), INTERVAL 8 DAY)),
+(3, 5, 18, 5, 'delivered', DATE_SUB(NOW(), INTERVAL 6 DAY)),
+(4, 6, 19, 15, 'pending', DATE_SUB(NOW(), INTERVAL 1 DAY)),
+(5, 7, 20, 12, 'pending', DATE_SUB(NOW(), INTERVAL 12 HOUR));
+
+
+SET FOREIGN_KEY_CHECKS = 1;</code></pre>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Skills Section -->
-<section class="skills-section">
-    <h2><i class="fas fa-code"></i> Technical Skills</h2>
-    
-    <div class="skills-grid">
-        <!-- Programming Languages -->
-<section class="skills-section">
-    <h2><i class="fas fa-code"></i> Programming Languages</h2>
-    
-    <div class="languages-grid">
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fab fa-python"></i>
-            </div>
-            <div class="language-info">
-                <h3>Python</h3>
-                <p class="language-use">Advanced – Simulations, AI, Backend</p>
-            </div>
-        </div>
-        
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fas fa-copyright"></i>
-            </div>
-            <div class="language-info">
-                <h3>C/C++</h3>
-                <p class="language-use">Proficient – Systems Programming, Algorithms</p>
-            </div>
-        </div>
-        
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fas fa-database"></i>
-            </div>
-            <div class="language-info">
-                <h3>MySQL</h3>
-                <p class="language-use">Advanced – Database Design, Queries</p>
-            </div>
-        </div>
-        
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fab fa-js-square"></i>
-            </div>
-            <div class="language-info">
-                <h3>JavaScript</h3>
-                <p class="language-use">Intermediate – Web Development</p>
-            </div>
-        </div>
-        
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fab fa-html5"></i>
-            </div>
-            <div class="language-info">
-                <h3>HTML/CSS</h3>
-                <p class="language-use">Proficient – Web Development, UI/UX</p>
-            </div>
-        </div>
-        
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="language-info">
-                <h3>R</h3>
-                <p class="language-use">Intermediate – Data Analysis, Statistics</p>
-            </div>
-        </div>
-        
-        <div class="language-item">
-            <div class="language-icon">
-                <i class="fas fa-square-root-alt"></i>
-            </div>
-            <div class="language-info">
-                <h3>Lean</h3>
-                <p class="language-use">Intermediate – Theorem Proving, Mathematics</p>
-            </div>
-        </div>
-    </div>
-</section>
-                <!-- Developer Tools -->
-                <div class="skills-category">
-                    <div class="category-header">
-                        <i class="fas fa-tools"></i>
-                        <h3>Developer Tools</h3>
-                    </div>
-                    <div class="skills-tags">
-                        <span class="tool-tag">Docker</span>
-                        <span class="tool-tag">VS Code</span>
-                        <span class="tool-tag">DBeaver</span>
-                        <span class="tool-tag">Visual Studio</span>
-                        <span class="tool-tag">MATLAB</span>
-                        <span class="tool-tag">Git/GitHub</span>
-                        <span class="tool-tag">Command Line</span>
-                        <span class="tool-tag">Google Sheets</span>
-                    </div>
-                    <div class="tools-description">
-                        <h4>Proficiency:</h4>
-                        <ul>
-                            <li><strong>Docker:</strong> Containerization for development environments</li>
-                            <li><strong>VS Code:</strong> Primary IDE for Python, JavaScript, C++</li>
-                            <li><strong>DBeaver:</strong> Database management and query optimization</li>
-                            <li><strong>MATLAB:</strong> Scientific computing and data analysis</li>
-                        </ul>
+        <!-- Simplified Programming Languages -->
+        <section class="skills-section">
+            <h2><i class="fas fa-code"></i> Programming Languages & Tools</h2>
+            
+            <div class="simple-languages">
+                <div class="language-category">
+                    <h3><i class="fas fa-laptop-code"></i> Languages</h3>
+                    <div class="language-tags">
+                        <span class="lang-tag">Python</span>
+                        <span class="lang-tag">C/C++</span>
+                        <span class="lang-tag">MySQL</span>
+                        <span class="lang-tag">JavaScript</span>
+                        <span class="lang-tag">HTML/CSS</span>
+                        <span class="lang-tag">R</span>
+                        <span class="lang-tag">Lean</span>
                     </div>
                 </div>
-
-                <!-- Applications & Software -->
-                <div class="skills-category">
-                    <div class="category-header">
-                        <i class="fas fa-paint-brush"></i>
-                        <h3>Applications & Software</h3>
-                    </div>
-                    <div class="applications-grid">
-                        <div class="app-item">
-                            <i class="fas fa-cube"></i>
-                            <div>
-                                <h4>Blender</h4>
-                                <p>3D modeling and animation for AI research assets</p>
-                            </div>
-                        </div>
-                        <div class="app-item">
-                            <i class="fas fa-gamepad"></i>
-                            <div>
-                                <h4>Godot</h4>
-                                <p>Game engine for simulation and digital asset creation</p>
-                            </div>
-                        </div>
-                        <div class="app-item">
-                            <i class="fas fa-palette"></i>
-                            <div>
-                                <h4>Krita</h4>
-                                <p>Digital painting and texture creation for AI training</p>
-                            </div>
-                        </div>
-                        <div class="app-item">
-                            <i class="fas fa-vr-cardboard"></i>
-                            <div>
-                                <h4>Unreal Engine</h4>
-                                <p>High fidelity 3D environments and simulations</p>
-                            </div>
-                        </div>
-                        <div class="app-item">
-                            <i class="fas fa-gamepad"></i>
-                            <div>
-                                <h4>Unity</h4>
-                                <p>Game development and interactive simulations</p>
-                            </div>
-                        </div>
+                
+                <div class="language-category">
+                    <h3><i class="fas fa-tools"></i> Developer Tools</h3>
+                    <div class="language-tags">
+                        <span class="lang-tag">Docker</span>
+                        <span class="lang-tag">VS Code</span>
+                        <span class="lang-tag">DBeaver</span>
+                        <span class="lang-tag">MATLAB</span>
+                        <span class="lang-tag">Git</span>
                     </div>
                 </div>
-
-                <!-- Areas of Expertise -->
-                <div class="skills-category full-width">
-                    <div class="category-header">
-                        <i class="fas fa-brain"></i>
-                        <h3>Areas of Expertise</h3>
-                    </div>
-                    <div class="expertise-grid">
-                        <div class="expertise-item">
-                            <h4><i class="fas fa-robot"></i> AI & Machine Learning</h4>
-                            <ul>
-                                <li>LLM Training & Fine tuning</li>
-                                <li>Prompt Engineering</li>
-                                <li>Conversational AI Development</li>
-                                <li>Digital Asset Creation for AI Research</li>
-                            </ul>
-                        </div>
-                        <div class="expertise-item">
-                            <h4><i class="fas fa-database"></i> Database Systems</h4>
-                            <ul>
-                                <li>Database Design & Normalization</li>
-                                <li>SQL Query Optimization</li>
-                                <li>Transaction Management</li>
-                                <li>Data Modeling</li>
-                            </ul>
-                        </div>
-                        <div class="expertise-item">
-                            <h4><i class="fas fa-gamepad"></i> Simulation & Modeling</h4>
-                            <ul>
-                                <li>Physics based Simulations</li>
-                                <li>Multi-agent Systems</li>
-                                <li>Optimization Algorithms</li>
-                                <li>Real time Visualization</li>
-                            </ul>
-                        </div>
-                        <div class="expertise-item">
-                            <h4><i class="fas fa-microchip"></i> Hardware & Electronics</h4>
-                            <ul>
-                                <li>Electronics Repair</li>
-                                <li>Micro Soldering</li>
-                                <li>Equipment Maintenance</li>
-                                <li>Troubleshooting</li>
-                            </ul>
-                        </div>
+                
+                <div class="language-category">
+                    <h3><i class="fas fa-paint-brush"></i> Applications</h3>
+                    <div class="language-tags">
+                        <span class="lang-tag">Blender</span>
+                        <span class="lang-tag">Godot</span>
+                        <span class="lang-tag">Krita</span>
+                        <span class="lang-tag">Unreal Engine</span>
+                        <span class="lang-tag">Unity</span>
                     </div>
                 </div>
             </div>
@@ -363,10 +914,52 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Ramon Gao. All rights reserved.</p>
+            <p>&copy; 2024 Raymond Gao. All rights reserved.</p>
             <div class="social-links">
                 <a href="mailto:RamonGao05@gmail.com"><i class="fas fa-envelope"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
             </div>
-        </div
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality for code display
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Simple code copy functionality
+            const codeBlocks = document.querySelectorAll('pre code');
+            codeBlocks.forEach(block => {
+                block.addEventListener('click', function() {
+                    const code = this.textContent;
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalText = this.dataset.originalText || this.textContent;
+                        this.textContent = 'Copied to clipboard!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
