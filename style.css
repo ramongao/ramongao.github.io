@@ -1408,14 +1408,11 @@ select:focus {
 }
 
 
-/* ================= MOBILE NAVBAR FIX ================= */
+/* ================= MOBILE MENU FIXES ================= */
 @media (max-width: 768px) {
-    .navbar .container {
-        flex-wrap: wrap;
-        padding: 1rem 15px;
-    }
-    
+    /* Hide menu by default on mobile */
     .nav-links {
+        display: none;
         position: fixed;
         top: 70px;
         left: 0;
@@ -1424,13 +1421,12 @@ select:focus {
         flex-direction: column;
         padding: 1rem;
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
         z-index: 1000;
     }
     
+    /* Show menu when active class is added */
     .nav-links.active {
-        transform: translateX(0);
+        display: flex;
     }
     
     .nav-links li {
@@ -1440,59 +1436,31 @@ select:focus {
     .nav-links a {
         padding: 1rem;
         justify-content: center;
-    }
-    
-    .menu-toggle {
-        display: block;
-    }
-    
-    /* Make sure content doesn't overflow */
-    body {
-        overflow-x: hidden;
         width: 100%;
     }
     
-    .container {
-        padding: 0 15px;
-        max-width: 100%;
+    /* Show hamburger menu button */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--dark-color);
+        z-index: 1001;
     }
     
-    /* Fix hero layout for mobile */
-    .hero .container {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
+    /* Make sure navbar container has proper spacing */
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 20px;
+        position: relative;
     }
     
-    .hero-image {
-        order: -1;
-        margin-bottom: 20px;
+    /* Fix logo spacing */
+    .logo {
+        margin-right: auto;
     }
-    
-    .hero-buttons {
-        justify-content: center;
-    }
-    
-    .links-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Prevent horizontal scrolling */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-/* Make sure containers don't overflow */
-.container {
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Responsive images */
-img {
-    max-width: 100%;
-    height: auto;
 }
