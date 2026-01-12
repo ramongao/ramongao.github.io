@@ -241,51 +241,67 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Mobile menu toggle
+// Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
+    const navbar = document.querySelector('.navbar');
     
+    console.log('Script loaded - Menu toggle:', menuToggle);
+    console.log('Script loaded - Nav links:', navLinks);
+    
+    // Only set up if elements exist
     if (menuToggle && navLinks) {
-        // Toggle menu when hamburger is clicked
+        console.log('Setting up mobile menu...');
+        
+        // Toggle menu on button click
         menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent click from bubbling
+            e.stopPropagation(); // Don't let click bubble up
+            console.log('Menu button clicked!');
+            
+            // Toggle active class
             navLinks.classList.toggle('active');
             
             // Change icon
-            const icon = menuToggle.querySelector('i');
+            const icon = this.querySelector('i');
             if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+                icon.className = 'fas fa-times';
+                console.log('Menu opened');
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                icon.className = 'fas fa-bars';
+                console.log('Menu closed');
             }
         });
         
         // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(link => {
             link.addEventListener('click', () => {
+                console.log('Link clicked, closing menu');
                 navLinks.classList.remove('active');
                 const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                icon.className = 'fas fa-bars';
             });
         });
         
         // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.navbar') && navLinks.classList.contains('active')) {
+        document.addEventListener('click', function(e) {
+            if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
+                console.log('Clicked outside, closing menu');
                 navLinks.classList.remove('active');
                 const icon = menuToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                icon.className = 'fas fa-bars';
             }
         });
+        
+        // Prevent clicks inside menu from closing it
+        navLinks.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        console.log('Mobile menu setup complete');
+    } else {
+        console.error('Menu elements not found!');
     }
-    
-    // Prevent clicks inside menu from closing it
-    navLinks.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
 });
