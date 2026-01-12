@@ -246,28 +246,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
+    if (menuToggle && navLinks) {
+        // Toggle menu when hamburger is clicked
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent click from bubbling
             navLinks.classList.toggle('active');
-            menuToggle.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+            
+            // Change icon
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
         
         // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.navbar') && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
     }
     
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar') && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        }
+    // Prevent clicks inside menu from closing it
+    navLinks.addEventListener('click', function(e) {
+        e.stopPropagation();
     });
 });
