@@ -1408,25 +1408,59 @@ select:focus {
 }
 
 
-/* Simple mobile menu */
+/* ================= MOBILE MENU FIXES ================= */
 @media (max-width: 768px) {
+    /* Hide menu by default on mobile */
     .nav-links {
         display: none;
-        width: 100%;
-        text-align: center;
-        padding-top: 1rem;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
     
+    /* Show menu when active class is added */
     .nav-links.active {
-        display: block;
+        display: flex;
     }
     
     .nav-links li {
-        display: block;
-        margin: 10px 0;
+        width: 100%;
     }
     
+    .nav-links a {
+        padding: 1rem;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    /* Show hamburger menu button */
     .menu-toggle {
         display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--dark-color);
+        z-index: 1001;
+    }
+    
+    /* Make sure navbar container has proper spacing */
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 20px;
+        position: relative;
+    }
+    
+    /* Fix logo spacing */
+    .logo {
+        margin-right: auto;
     }
 }
